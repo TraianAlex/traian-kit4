@@ -14,7 +14,7 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           <li><a href="javascript:history.go(-1);">Back</a></li>
-          <li class="active"><a href="<?=SITE_ROOT?>/users/welcome">Home <span class="sr-only">(current)</span></a></li>
+          <li class="active"><a href="<?=SITE_ROOT?>/users">Home <span class="sr-only">(current)</span></a></li>
           <?php
   if(isset($_SESSION['user'])){?>
           <li><a href="<?=SITE_ROOT?>/users/log_out/logout">Log out</a></li>

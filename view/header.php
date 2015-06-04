@@ -27,14 +27,14 @@ file_exists(APP_PATH.'/application/page_rules.php') ?
                     <li><a href="<?=SITE_ROOT?>/users/log_out" onclick="logout_all()">Log out</a></li>
                     <li><a href="<?=SITE_ROOT?>/users/profile"><?=$_SESSION['user']?> Profile</a></li><?php
             }
-            if(!isset($_SESSION['user']) && isset($_GET['page']) && $_GET['page'] != 'welcome'){?>
-                    <li><a class="sign_in" href="<?=SITE_ROOT?>/users/welcome">Sign in</a></li><?php
+            if(!isset($_SESSION['user'])){?>
+                    <li><a class="sign_in" href="<?=SITE_ROOT?>/users">Sign in</a></li><?php
             }
             if (isset($_SESSION ['id']) && $_SESSION ['id'] == sha1(K1 . sha1(session_id() . K1))) {
                 $h = new Crypt_HMAC(KEY);?>
-                 <li><a href="<?=SITE_ROOT?>/<?=$h->create_parameters(array('class' => 'admins',
-                                                         'page' => 'users',
-                                                           'id' => null));?>">Edit</a></li><?php
+                 <li><a href="<?=SITE_ROOT?>/<?=$h->create_parameters(['class' => 'admins',
+                                                      'page' => 'users',
+                                                        'id' => null]);?>">Edit</a></li><?php
             }?>
                     <li><a href="<?=SITE_ROOT?>/users/login_area">Protected</a></li>
 
