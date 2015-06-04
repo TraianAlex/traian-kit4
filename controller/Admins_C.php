@@ -7,7 +7,7 @@ final class Admins_C extends Controller{
     }
 
     public function index() {
-        URL::to(SITE_ROOT."/admin/admin.php?class=admins&page=admin");
+        URL::to(SITE_ROOT."/admins/admin");
     }
 
     public function admin() {
@@ -67,7 +67,7 @@ final class Admins_C extends Controller{
         $this->view('admins/user_list', $users);
     }
 
-    public function register() {
+    public function reg_adm() {
         
         if ($this->input->exist('add_new_admin')  && $this->input->get('add_new_admin') == 'Register'){
             try{
@@ -90,7 +90,7 @@ final class Admins_C extends Controller{
         $this->view('admins/newadmin_form');
     }
     
-    public function profile(){
+    public function profile_adm(){
         
         $this->view('admins/header');
         echo "Profile Under construction";
@@ -102,7 +102,7 @@ final class Admins_C extends Controller{
         echo "Under construction";
     }
     
-    public function test(){
+    public function test_adm(){
     
         $this->view('admins/header');
     	$this->view('admins/test');

@@ -13,7 +13,7 @@
 */
     $config_page['all_pages'] = ['index', 'login', 'register', 'log_out', 'forgot_password', 'send_pass',
            'profile', 'personal_data', 'password', 'update_data', 'change_pass', 'oath_ajax_login', 'oath_fb_login',
-           'login_area', 'nologin_area', 'test',
+           'login_area', 'nologin_area',
            null];
 /*
 * in this page must log in first
@@ -32,11 +32,11 @@
 /*
  * a white list for admin pages
  */
-       $config_page['admin'] = ['index', 'admin', 'login', 'users', 'register', 'profile', 'visitors', 'test'];
+       $config_page['admin'] = ['index', 'admin', 'login', 'users', 'reg_adm', 'profile_adm', 'visitors', 'test_adm'];
 /*
 * in this page must log in first
 */
-       $config_page['login_admin'] = ['users', 'register', 'profile', 'visitors', 'test'];
+       $config_page['login_admin'] = ['users', 'reg_adm', 'profile_adm', 'visitors', 'test_adm'];
        
 //---------REGISTER CLASSES NAMES FROM URL ----------------------------------------------------------------------
        

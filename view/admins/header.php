@@ -18,12 +18,12 @@
           <?php
   if(isset($_SESSION['user'])){?>
           <li><a href="<?=SITE_ROOT?>/users/log_out/logout">Log out</a></li>
-          <li><?=URL::xlink('admins','profile', null, $_SESSION['user'].' Profile')?></li><?php
+          <li><?=URL::xlink('admins','profile_adm', null, $_SESSION['user'].' Profile')?></li><?php
   }?>
           <li><?=URL::xlink('admins','users', null, 'Users')?></li>
-          <li><?=URL::xlink('admins','register', null, 'Register')?></li>
+          <li><?=URL::xlink('admins','reg_adm', null, 'Register')?></li>
           <li><?=URL::xlink('admins','visitors', null, 'Statistic')?></li>
-          <li><?=URL::xlink('admins','test', null, 'Test')?></li>
+          <li><?=URL::xlink('admins','test_adm', null, 'Test')?></li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!--end container -->

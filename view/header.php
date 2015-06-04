@@ -32,9 +32,9 @@ file_exists(APP_PATH.'/application/page_rules.php') ?
             }
             if (isset($_SESSION ['id']) && $_SESSION ['id'] == sha1(K1 . sha1(session_id() . K1))) {
                 $h = new Crypt_HMAC(KEY);?>
-                 <li><a href="<?=SITE_ROOT?>/admin/admin.php?<?=$h->create_parameters(array('class' => 'admins',
-                                                                            'page' => 'users',
-                                                                            'id' => null));?>">Edit</a></li><?php
+                 <li><a href="<?=SITE_ROOT?>/<?=$h->create_parameters(array('class' => 'admins',
+                                                         'page' => 'users',
+                                                           'id' => null));?>">Edit</a></li><?php
             }?>
                     <li><a href="<?=SITE_ROOT?>/users/login_area">Protected</a></li>
 

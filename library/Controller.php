@@ -19,13 +19,14 @@ class Controller {
     
     public function index() {
  
-        if(basename($_SERVER['SCRIPT_FILENAME']) == 'index.php'):
+        file_exists(APP_PATH.'/application/page_rules.php') ?
+            include APP_PATH."/application/page_rules.php": "";
+        if(in_array($this->page, $config_page['all_pages'])):
             $this->checkUserPage();
-        elseif(basename($_SERVER['SCRIPT_FILENAME']) == 'admin.php'):
-            if(filter_input(INPUT_GET, 'class', FILTER_SANITIZE_STRING ) != 'admins' &&
-               !in_array($this->page, array('index', 'login'))):
-                $this->check_hash();
-            endif;
+        elseif(in_array($this->page, $config_page['admin'])):
+            //if(get_url()[0] != 'admins' && !in_array($this->page, array('index', 'login'))):
+                //$this->check_hash();
+            //endif;
             $this->checkAdminPage();
         endif;
         $this->view('head');
@@ -62,7 +63,9 @@ class Controller {
         $obj = is_subclass_of($class, 'Controller') && is_a($class, 'Controller') ?
             Registry::getInstance(): new Users_C();
         //$method = $this->getMethod();
-        method_exists($obj, $this->page) ? call_user_func_array([$obj, $this->page], $param=[]) : $obj->index();
+        $url = get_url();
+        $params = $url ? array_values($url) : [];
+        method_exists($obj, $this->page) ? call_user_func_array([$obj, $this->page], $params) : $obj->index();
         //method_exists($obj, $method) ? $obj->$method() : $obj->index();
         //unset($method);
     }
@@ -71,15 +74,13 @@ class Controller {
 
         file_exists(APP_PATH.'/application/page_rules.php') ?
             include APP_PATH."/application/page_rules.php": "";
-        $method = array_key_exists('page', $_GET) ?
-            filter_input(INPUT_GET, 'page', FILTER_SANITIZE_STRING) : $config_page['default_page'];
+        $method = isset(get_url()[1]) ? get_url()[1] : $config_page['default_page'];
         return $this->valid->check($method);
     }
 
     protected function getId(){
         
-        $id = array_key_exists('id', $_GET) ?
-            filter_input(INPUT_GET, 'id', FILTER_SANITIZE_STRING) : null;
+        $id = isset(get_url()[2]) ? get_url()[2] : null;
         return $this->valid->check($id);
     }
     
@@ -118,10 +119,10 @@ class Controller {
         file_exists(APP_PATH.'/application/page_rules.php') ?
             include APP_PATH."/application/page_rules.php" : "";
         if (!in_array($this->page, $config_page['admin']))
-            URL::to(SITE_ROOT . "/admin/admin.php?class=admins&page=index");
+            URL::to(SITE_ROOT . "/admins");
         if (in_array($this->page, $config_page['login_admin']) && $this->session->checkAdmin() === false):
             Errors::handle_error2(null,'You must login to see this page.');
-            URL::to(SITE_ROOT.'/admin/admin.php?class=admins&page=index');
+            URL::to(SITE_ROOT.'/admins');
         endif;
         return $this->valid->check($this->page);
     }

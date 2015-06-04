@@ -26,8 +26,7 @@ class Registry{
         
         file_exists(APP_PATH.'/application/page_rules.php') ?
             include APP_PATH."/application/page_rules.php" : "";
-        $class = array_key_exists('class', $_GET) ?
-            filter_input(INPUT_GET, 'class', FILTER_SANITIZE_STRING) : $config_page['default_class'];
+        $class = isset(get_url()[0]) ? get_url()[0] : $config_page['default_class'];
         if(!in_array($class, $config_class['allowed']))
             $class = $config_page['default_class'];
         return Validate::check($class);

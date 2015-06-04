@@ -73,7 +73,7 @@ function S(obj){
                 }
                 params = "newuser=" + newuser.value;
                 request = new ajaxRequest();
-                request.open("POST", "http://localhost/traian3/new-pdo/inc/Ajax_method.php", true);
+                request.open("POST", "http://localhost/traian-kit4/new-pdo/inc/Ajax_method.php", true);
                 request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                 request.setRequestHeader("Content-length", params.length);
                 request.setRequestHeader("Connection", "close");
@@ -94,7 +94,7 @@ function S(obj){
                 }
                 params = "newadmin=" + newadmin.value;
                 request = new ajaxRequest();
-                request.open("POST", "http://localhost/traian3/new-pdo/inc/Ajax_method.php", true);
+                request.open("POST", "http://localhost/traian-kit4/new-pdo/inc/Ajax_method.php", true);
                 request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                 request.setRequestHeader("Content-length", params.length);
                 request.setRequestHeader("Connection", "close");

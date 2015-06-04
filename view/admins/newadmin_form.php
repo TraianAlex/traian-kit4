@@ -8,7 +8,7 @@ isset($_SESSION['reg']) ? $p = $_SESSION['reg'] : $p = NULL;
 <div class="container page-content">
     <div class="row">
 <br>
-<form id="signup_form" name="signup_form" method="post" action="<?=SITE_ROOT?>/admin/admin.php?class=admins&page=register&id=<?=T?>" class="formoid-solid-green" style="background-color:#FFFFFF;font-size:14px;font-family:'Roboto',Arial,Helvetica,sans-serif;color:#34495E;max-width:620px;min-width:150px">
+<form id="signup_form" name="signup_form" method="post" action="<?=SITE_ROOT?>/admins/reg_adm/<?=T?>" class="formoid-solid-green" style="background-color:#FFFFFF;font-size:14px;font-family:'Roboto',Arial,Helvetica,sans-serif;color:#34495E;max-width:620px;min-width:150px">
     <div class="title"><h2>Registration form</h2></div>
     <?=Errors::show_errors()?>
 

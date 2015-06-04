@@ -22,10 +22,10 @@ class CSRF{
 
     public static function checkToken($post_v){
 
-        if(!Sessions::exist('n') || !Sessions::exist('v') ||
-            !Input::get('id') || !isset($post_v) ||
-            Input::exist('id', 'get') === false || empty($post_v) ||
-            Input::get('id') !== Sessions::get('n') || $post_v !== Sessions::get('v') ||
+        $tok = Validate::check(get_url()[2]);
+        if(!Sessions::exist('n') || !Sessions::exist('v') || !$tok || !isset($post_v) ||
+            $tok === false || empty($post_v) ||
+            $tok !== Sessions::get('n') || $post_v !== Sessions::get('v') ||
             !Sessions::exist('time') || (time() - Sessions::get('time') >= 180)){
             Errors::handle_error2(null,'&#x2718; Try again.');
             exit;

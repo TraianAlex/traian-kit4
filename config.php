@@ -3,14 +3,14 @@
 //-------- 1. CONSTANTS define the default path for includes -----------------------------
 
 defined('DS') ? null : define('DS', DIRECTORY_SEPARATOR);
-if ($_SERVER['HTTP_HOST'] == 'www.traian3.embassy-pub.ro'){
+if ($_SERVER['HTTP_HOST'] == 'www.traian4.embassy-pub.ro'){
 	define("APP_PATH", dirname(__FILE__));
         define('PATH', '');
         define("SITE_ROOT", "/new-pdo");
         define("PATH_UPL", SITE_ROOT);
         define("PATH_FILE", dirname(__FILE__).SITE_ROOT);
 	define("NEW_ADDRESS", "");
-        define("BASE", 'http://www.traian3.embassy-pub.ro');
+        define("BASE", 'http://www.traian4.embassy-pub.ro');
 	//define("DEBUG_MODE", false);
 	define("DEBUG_MODE", true);//on the cloud change this with false
         
@@ -55,11 +55,11 @@ Hash::init();
 
 //----------------------4 ERROR REPORTING ---------------------------------------------
 
-if ($_SERVER['HTTP_HOST'] == 'www.traian3.embassy-pub.ro') {
+if ($_SERVER['HTTP_HOST'] == 'www.traian4.embassy-pub.ro') {
     //set_error_handler('Errors::my_error_handler_prod');
     set_error_handler('Errors::my_error_handler', E_ALL);
     if (isset($_SESSION['system_error_message'])) {
-        error_log($_SESSION['system_error_message']."\n", 3,"/home/remb4372/public_html/traian3/new-pdo/error.log");
+        error_log($_SESSION['system_error_message']."\n", 3,"/home/remb4372/public_html/traian4/new-pdo/error.log");
     }
 }else{
     set_error_handler('Errors::my_error_handler', E_ALL);

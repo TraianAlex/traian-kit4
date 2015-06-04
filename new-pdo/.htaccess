@@ -1,20 +1,19 @@
+Options -MultiViews
 RewriteEngine on
 AddType application/x-httpd-php55 .php
-RewriteCond %{REQUEST_FILENAME} !-d
-# a local file is requested
+RewriteBase /traian-kit4/new-pdo
+RewriteCond %{REQUEST_URI} ^application.*
+RewriteRule ^(.*)$ /index.php?/$1 [L]
+RewriteCond $1 !^(index\.php|public|robots\.txt)
 RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L]
+#RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
 RewriteCond %{REQUEST_URI} !=/favicon.ico
 # meet condition below
 RewriteRule \.(gif|jpg|png|css|ico|swf|js|inc\.php)$ - [L]
 # file forbidden
 RewriteRule \.(txt|log|xml)$ - [F]
-#RewriteRule ^index/(\w+)(|/)$ index.php?page=$1 [NC,L]
-#RewriteRule ^index/(\w+)/([\w-]+) index.php?page=$1&id=$2 [NC,L]
-#from here is good
-RewriteRule ^(\w+)$ index.php?class=$1 [NC,L]
-RewriteRule ^(\w+)/(|/)$ index.php?class=$1 [NC,L]
-RewriteRule ^(\w+)/([\w-]+)$ index.php?class=$1&page=$2 [NC,L]
-RewriteRule ^(\w+)/([\w-]+)/([\w-]+)$ index.php?class=$1&page=$2&id=$3 [NC,L]
 <ifModule mod_gzip.c>  
 mod_gzip_on Yes  
 mod_gzip_dechunk Yes  

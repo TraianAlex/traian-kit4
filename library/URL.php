@@ -21,11 +21,11 @@ class URL{
             exit;
         }
     }
-
+//link li
     public static function link_l($url, $label, $target=null){
         return '<li><a href="'.$url.'" target='.$target.'>'. $label .'</a></li>';
     }
-    
+//simple link
     public static function link_s($url, $label, $target=null){
         return "<a href=".$url." target=".$target.">$label</a>";
     }
@@ -37,17 +37,10 @@ class URL{
  */
      public static function create_crumbs() {
 
-        $class = $page = $id = null;
-        array_key_exists('class', $_GET)?
-            $class = filter_input(INPUT_GET, 'class', FILTER_SANITIZE_STRING):
-            $class = 'users';
-        array_key_exists('page', $_GET)?
-            $page = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_STRING):
-            $page = 'welcome';
-        array_key_exists('id', $_GET)?
-            $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_STRING):
-            $id = "";
-         return " <ol class='breadcrumb'>"
+        $class = isset(get_url()[0]) ? get_url()[0] : 'users';
+        $page = isset(get_url()[1]) ? get_url()[1] : 'index';
+        $id = isset(get_url()[2]) ? get_url()[2] : null;
+        return " <ol class='breadcrumb'>"
                 . "<li>".self::back()."</li>"
                 . "<li><a href ='".SITE_ROOT."/users/nologin_area'>Home</a></li> "
                 . "<li><a href ='".SITE_ROOT."/$class/$page'>$page</a> $id</li>"
@@ -83,22 +76,19 @@ class URL{
     public static function xlink($class, $page, $id, $string){
 
         $h = new Crypt_HMAC(KEY);
-        $path = str_replace( $_SERVER['DOCUMENT_ROOT'], '', $_SERVER['SCRIPT_FILENAME']);
-        return "<a href='$path?".$h->create_parameters(array('class' => $class, 'page'=>$page,'id'=>$id))."'>$string</a>";
+        return "<a href='".SITE_ROOT."/".$h->create_parameters(array('class' => $class, 'page'=>$page,'id'=>$id))."'>$string</a>";
     }
 //for sidebar
     public static function xlink2($class, $page, $id, $string){
 
         $h = new Crypt_HMAC(KEY);
-        $path = str_replace( $_SERVER['DOCUMENT_ROOT'], '', $_SERVER['SCRIPT_FILENAME']);
-        return "<a $class href='$path?".$h->create_parameters(array('class' => $class, 'page'=>$page,'id'=>$id))."'>$string</a>";
+        return "<a $class href='".SITE_ROOT."/".$h->create_parameters(array('class' => $class, 'page'=>$page,'id'=>$id))."'>$string</a>";
     }
 
     public static function xlink3($class, $page, $id){
 
         $h = new Crypt_HMAC(KEY);
-        $path = str_replace( $_SERVER['DOCUMENT_ROOT'], '', $_SERVER['SCRIPT_FILENAME']);
-        return $path."?".$h->create_parameters(array('class' => $class, 'page' => $page, 'id' => $id));
+        return SITE_ROOT."/".$h->create_parameters(array('class' => $class, 'page' => $page, 'id' => $id));
     }
 /**
  * admin
@@ -109,7 +99,7 @@ class URL{
     public static function xdelete($class, $page, $id){
 
         $h = new Crypt_HMAC(KEY);
-        return "<a href='{$_SERVER['SCRIPT_NAME']}?".$h->create_parameters(array("class" => $class, "page" => $page,
+        return "<a href='".SITE_ROOT."/".$h->create_parameters(array("class" => $class, "page" => $page,
             "id" => $id))."'><img class='delete_user' src='".SITE_ROOT."/images/delete.png' width=15 alt=''></a>";
     }
 }

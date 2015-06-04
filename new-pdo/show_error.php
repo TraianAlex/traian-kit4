@@ -10,35 +10,19 @@ if(file_exists('../config.php')) include_once '../config.php';
 
  if (isset($_SESSION['system_error_message'])) {
 	$system_error_message = preg_replace("/\\\\/", '', $_SESSION['system_error_message']);
-  } else {
+ } else {
 	$system_error_message = "No system-level error message was reported.";
   }
 
-  load_view('head');
-  include "../view/header1.inc.php";
-    echo'<aside id="slider">
-     <div class="continueslider">';
-    echo "<ul>
-<li class='submit'><a href='".SITE_ROOT."/section1'>button1</a></li>
-<li class='submit'><a href='".SITE_ROOT."/section2'>button2</a></li>
-<li class='submit'><a href='".SITE_ROOT."/section3'>button3</a></li>
-<li class='submit'><a href='".SITE_ROOT."/section4'>button4</a></li>
-</ul>";
-    echo'</div>
-     <div class="continueslider">';
-echo '<p><a href="'.SITE_ROOT.'/section5"><img src="'.SITE_ROOT.'/img/p1s1.png"></a></p>';
-echo "<p><a href='".SITE_ROOT."/section6'><img src='".SITE_ROOT."/img/p2s1.png'></a></p>";
-echo "<p><a href='".SITE_ROOT."/section7'><img src='".SITE_ROOT."/img/p3s1.png'></a></p>";
-    echo '</div>
-     </aside>
-<!----------------------------------------------------------------------------->
+  include "../view/head.php";
+  include "../view/header.php";?>
+
   <section id="content">';
   ?><br>
   <div id="example">Sorry!</div>
   <div id="content">
     <h1>We're really sorry...</h1>
-    <p><img src="images/error.jpg" class="error" />
-      <?=$error_message; ?>
+    <p><?=$error_message; ?>
       <span></p>
     <p>Don't worry, though, we've been notified that there's a
 problem, and we take these things seriously. In fact, if you want to
@@ -57,7 +41,7 @@ really sorry for the inconvenience.</p>
     ?>
   </div><?php
    echo '</section>';
-  load_view('footer.inc');
+  include_once '../view/footer.php';
   if(isset($_SESSION['error_message'])||isset($_SESSION['system_error_message'])){
     unset($_SESSION['error_message'],$_SESSION['system_error_message']);
     session_destroy();

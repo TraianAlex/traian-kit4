@@ -1,5 +1,15 @@
 <?php
 
+function get_url(){
+        
+        $raw_url = filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_URL);
+        $arr1 = explode('/', trim(str_replace(SITE_ROOT, '', $raw_url), '/'));
+        foreach ($arr1 as $item):
+            $url[] = isset($item) ? $item : '';
+        endforeach;
+        return $url;
+    }
+
     function show_date() {
         date_default_timezone_set("America/New_York");
         echo '<div style="float:right">' . date("Y/m/d H:i:s") . '</div><br>';

@@ -50,12 +50,12 @@ class Crypt_HMAC {
         $this->_ret = array();
         /* Construct the string with our key/value pairs */
         foreach ($array as $key => $value) {
-            $this->_data .= $key . $value;
-            $this->_ret[] = "$key=$value";
-    }
+            $this->_data .= $value;
+            $this->_ret[] = $value;
+        }
         $hash = $this->hash($this->_data);
-        $this->_ret[] = "h=$hash";
-        return join('&', $this->_ret);//return join ('&amp;', $ret);
+        $this->_ret[] = $hash;
+        return join('/', $this->_ret);//return join ('&amp;', $ret);
     }
 //To verify the parameters passed to the script, we can use this script:
     public function verify_parameters($array) {
