@@ -16,7 +16,7 @@ class Validate {
         file_exists(APP_PATH.'/application/validation_rules.php') ?
             include_once APP_PATH."/application/validation_rules.php":
             print "no rules set";
-        $formData = array();
+        $formData = [];
         foreach($input as $key => $val):
             $formData[$key] = $val;
 
@@ -203,12 +203,10 @@ class Validate {
  * @return boolean
  */
     private function ValidateEmail($email){
-
    // This plug-in takes an email address and determines whether
    // it appears to be valid. The argument required is:
    //
    //    $email: An email address to validate
-
        $at = strrpos($email, '@');
 
        if (!$at || strlen($email) < 6)
@@ -258,7 +256,7 @@ class Validate {
    // Only one element is returned and its value is TRUE.
 
        $len   = strlen($text);
-       $error = array();
+       $error = [];
 
        if ($len < $minlength)
           $error[] = "The string length is too short (min $minlength characters)";
@@ -295,7 +293,7 @@ class Validate {
             for ($j = 0; $j < count($error); ++$j) {
                 Errors::handle_error2(null, '&#x2718; ' . $error[$j]);
                 exit;
-                //array(FALSE, $error);
+                //[FALSE, $error];
             }
         } else {
             return TRUE;
@@ -337,12 +335,9 @@ class Validate {
 
     public function post_sec2($data){
 
-        $dis = array('select', 'insert', 'delete', 'update','drop table', 'union',
-            'null','order by','order+by','from','version','database','tables','query',
-            '<','>','<script','/>');
         if(isset($data) && empty($data) === false){ 
-            for ($j = 0; $j < sizeof($dis); ++$j){
-                if(preg_match (',' . $dis[$j] . ',', strtolower($data)))
+            for ($j = 0; $j < sizeof($this->dis); ++$j){
+                if(preg_match (',' . $this->dis[$j] . ',', strtolower($data)))
                   Errors::handle_error2(null, 'Please use another word!');
             }
         }
@@ -351,13 +346,10 @@ class Validate {
     public function post_sec(){
 
       if(isset($_POST)){
-        $dis = array('select', 'insert', 'delete', 'update','drop table', 'union',
-            'null','order by','order+by','from','version','database','tables','query',
-            '<','>','<script','/>');
         for ($i = 0; $i < sizeof($_POST); ++$i){
-          for ($j = 0; $j < sizeof($dis); ++$j){
+          for ($j = 0; $j < sizeof($this->dis); ++$j){
             foreach($_POST as $gets){
-              if(preg_match (',' . $dis[$j] . ',', strtolower($gets)))
+              if(preg_match (',' . $this->dis[$j] . ',', strtolower($gets)))
                 Errors::handle_error2(null, 'Please use another word!');
             }
           }
@@ -368,13 +360,10 @@ class Validate {
     public function get_sec(){
 
       if(isset($_GET)){
-        $dis = array('select', 'insert', 'delete', 'update','drop table', 'union',
-            'null','order by','order+by','from','version','database','tables','query',
-            '<','>','<script','/>');
         for ($i = 0; $i < sizeof($_GET); ++$i){
-          for ($j = 0; $j < sizeof($dis); ++$j){
+          for ($j = 0; $j < sizeof($this->dis); ++$j){
             foreach($_GET as $gets){
-              if(preg_match (',' . $dis[$j] . ',', strtolower($gets)))
+              if(preg_match (',' . $this->dis[$j] . ',', strtolower($gets)))
                 Errors::handle_error2(null, 'Please use another word!');
             }
           }
@@ -385,17 +374,18 @@ class Validate {
     public function full_sec(){
 
         if(isset($_REQUEST)){
-          $dis = array('select', 'insert', 'delete', 'update','drop table', 'union',
-              'null','order by','order+by','from','version','database','tables','query',
-              '<','>','<script','/>');
           for ($i = 0; $i < sizeof($_REQUEST); ++$i){
-            for ($j = 0; $j < sizeof($dis); ++$j){
+            for ($j = 0; $j < sizeof($this->dis); ++$j){
               foreach($_REQUEST as $gets){
-                if(preg_match (',' . $dis[$j] . ',', strtolower($gets)))
+                if(preg_match (',' . $this->dis[$j] . ',', strtolower($gets)))
                   Errors::handle_error2(null, 'Please use another word!');
               }
             }
           }
         }
     }
+    
+    private $dis = ['select', 'insert', 'delete', 'update','drop table', 'union',
+              'null','order by','order+by','from','version','database','tables','query',
+              '<','>','<script','/>'];
 }

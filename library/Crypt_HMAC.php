@@ -13,13 +13,13 @@ class Crypt_HMAC {
 
     private $_func;
     private $_data = 0;
-    private $_ret = array();
+    private $_ret = [];
 
 //* Pass method as first parameter
 //* @param string method - Hash function used for the calculation @return void @access public*/
     public function __construct($key, $method = 'sha1'){
         
-        if (!in_array($method, array('md5', 'sha1'))) {
+        if (!in_array($method, ['md5', 'sha1'])) {
             die("Unsupported hash function '$method'.");
         }
         $this->_func = $method;
@@ -47,7 +47,7 @@ class Crypt_HMAC {
     public function create_parameters($array) {
 
         $this->_data = 0;
-        $this->_ret = array();
+        $this->_ret = [];
         /* Construct the string with our key/value pairs */
         foreach ($array as $key => $value) {
             $this->_data .= $value;
@@ -64,8 +64,8 @@ class Crypt_HMAC {
         unset($array['h']);
         /* Construct the string with our key/value pairs */
         foreach ($array as $key => $value) {
-            $this->_data .= $key . $value;
-            $this->_ret[] = "$key=$value";
+            $this->_data .= $value;
+            $this->_ret[] = $value;
         }
         if ($hash != $this->hash($this->_data)) {
             return FALSE;
