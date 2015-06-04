@@ -1,6 +1,6 @@
 <?php
 
-function get_url(){
+    function get_url(){
         
         $raw_url = filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_URL);
         $arr1 = explode('/', trim(str_replace(SITE_ROOT, '', $raw_url), '/'));
