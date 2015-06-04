@@ -335,12 +335,20 @@ class Validate {
 
     public function post_sec2($data){
 
-        if(isset($data) && empty($data) === false){ 
-            for ($j = 0; $j < sizeof($this->dis); ++$j){
+        if(isset($data) && empty($data) === false)
+            for ($j = 0; $j < sizeof($this->dis); ++$j)
                 if(preg_match (',' . $this->dis[$j] . ',', strtolower($data)))
+                    Errors::handle_error2(null, 'Please use another word!');
+    }
+    
+    public function get_sec2($array){
+
+        if(isset($array))
+          for ($i = 0; $i < sizeof($array); ++$i)
+            for ($j = 0; $j < sizeof($this->dis); ++$j)
+              foreach($array as $gets)
+                if(preg_match (',' . $this->dis[$j] . ',', strtolower($gets)))
                   Errors::handle_error2(null, 'Please use another word!');
-            }
-        }
     }
     
     public function post_sec(){
