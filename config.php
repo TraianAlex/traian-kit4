@@ -6,6 +6,7 @@ defined('DS') ? null : define('DS', DIRECTORY_SEPARATOR);
 if ($_SERVER['HTTP_HOST'] == 'www.traian4.embassy-pub.ro'){
 	define("APP_PATH", dirname(__FILE__));
         define('PATH', '');
+        define("SITE_ROOT", PATH."/new-pdo");
         define("PATH_FILE", APP_PATH.SITE_ROOT);
 	define("ADDRESS", "");
         define("BASE", 'http://'.$_SERVER['HTTP_HOST']);
@@ -20,6 +21,7 @@ if ($_SERVER['HTTP_HOST'] == 'www.traian4.embassy-pub.ro'){
 }else{
         define('PATH', '/traian-kit4');
 	define("APP_PATH", $_SERVER['DOCUMENT_ROOT'].PATH);
+        define("SITE_ROOT", PATH."/new-pdo");
         define("PATH_FILE", $_SERVER['DOCUMENT_ROOT'].SITE_ROOT);
 	define("ADDRESS", 'http://'.$_SERVER['HTTP_HOST']);
         define("BASE", ADDRESS.SITE_ROOT.'/');
@@ -29,7 +31,6 @@ if ($_SERVER['HTTP_HOST'] == 'www.traian4.embassy-pub.ro'){
         ini_set('error_reporting', E_ALL);
 	error_reporting( E_ALL );
 }
-define("SITE_ROOT", PATH."/new-pdo");
 
 //--------------- 2. INCLUDES -------------------------------------------------------
 
