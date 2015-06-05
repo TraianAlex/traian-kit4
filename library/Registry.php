@@ -7,7 +7,7 @@ class Registry{
     private function __construct() { }
     private function __clone(){}
 
-    public static function getInstance($default = null){
+    public static function get($default = null){
         if (isset(self::$instance)){
             return self::$instance;
         }

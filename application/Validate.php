@@ -332,25 +332,29 @@ class Validate {
             Errors::handle_error2('Unsafe page ' . $page . ' requested', null);
         return $page;
     }
-
+/*
+ * check choosen input post from forms
+ */
     public function post_sec2($data){
 
         if(isset($data) && empty($data) === false)
-            for ($j = 0; $j < sizeof($this->dis); ++$j)
-                if(preg_match (',' . $this->dis[$j] . ',', strtolower($data)))
+            for ($j = 0; $j < sizeof(self::$dis); ++$j)
+                if(preg_match (',' . self::$dis[$j] . ',', strtolower($data)))
                     Errors::handle_error2(null, 'Please use another word!');
     }
-    
-    public function get_sec2($array){
+/*
+ * check any get input from url
+ */    
+    public static function get_sec2($array){
 
         if(isset($array))
           for ($i = 0; $i < sizeof($array); ++$i)
-            for ($j = 0; $j < sizeof($this->dis); ++$j)
+            for ($j = 0; $j < sizeof(self::$dis); ++$j)
               foreach($array as $gets)
-                if(preg_match (',' . $this->dis[$j] . ',', strtolower($gets)))
+                if(preg_match (',^' . self::$dis[$j] . '$,', strtolower($gets)))
                   Errors::handle_error2(null, 'Please use another word!');
     }
-    
+/*---------------------------------------------------------------------------------------*/
     public function post_sec(){
 
       if(isset($_POST)){
@@ -393,7 +397,7 @@ class Validate {
         }
     }
     
-    private $dis = ['select', 'insert', 'delete', 'update','drop table', 'union',
+    private static $dis = ['select', 'insert', 'delete', 'update','drop table', 'union',
               'null','order by','order+by','from','version','database','tables','query',
               '<','>','<script','/>'];
 }
