@@ -3,7 +3,7 @@
     function get_url(){
         
         $raw_url = filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_URL);
-        $arr1 = explode('/', trim(str_replace(SITE_ROOT, '', $raw_url), '/'));
+        $arr1 = explode('/', trim(str_replace(SITE_ROOT, '', parse_url($raw_url)['path']), '/'));
         foreach ($arr1 as $item):
             $url[] = isset($item) ? $item : '';
         endforeach;

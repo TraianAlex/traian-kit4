@@ -324,7 +324,7 @@ class Validate {
     }
 /*
  * check class, method, page, id in registry, router, controller
- * not . or .. //strstr($page, '.')strstr($page, '/')strstr($page, '.')strstr($page, '\\')
+ * not . or .. //strstr($page, '.')strstr($page, '/')strstr($page, '\\')
  */   
     public static function check($page){
         
@@ -357,44 +357,32 @@ class Validate {
 /*---------------------------------------------------------------------------------------*/
     public function post_sec(){
 
-      if(isset($_POST)){
-        for ($i = 0; $i < sizeof($_POST); ++$i){
-          for ($j = 0; $j < sizeof($this->dis); ++$j){
-            foreach($_POST as $gets){
-              if(preg_match (',' . $this->dis[$j] . ',', strtolower($gets)))
+      if(isset($_POST))
+        for ($i = 0; $i < sizeof($_POST); ++$i)
+          for ($j = 0; $j < sizeof(self::$dis); ++$j)
+            foreach($_POST as $gets)
+              if(preg_match (',' . self::$dis[$j] . ',', strtolower($gets)))
                 Errors::handle_error2(null, 'Please use another word!');
-            }
-          }
-        }
-      }
     }
     
     public function get_sec(){
 
-      if(isset($_GET)){
-        for ($i = 0; $i < sizeof($_GET); ++$i){
-          for ($j = 0; $j < sizeof($this->dis); ++$j){
-            foreach($_GET as $gets){
-              if(preg_match (',' . $this->dis[$j] . ',', strtolower($gets)))
+      if(isset($_GET))
+        for ($i = 0; $i < sizeof($_GET); ++$i)
+          for ($j = 0; $j < sizeof(self::$dis); ++$j)
+            foreach($_GET as $gets)
+              if(preg_match (',' . self::$dis[$j] . ',', strtolower($gets)))
                 Errors::handle_error2(null, 'Please use another word!');
-            }
-          }
-        }
-      }
     }
     
     public function full_sec(){
 
-        if(isset($_REQUEST)){
-          for ($i = 0; $i < sizeof($_REQUEST); ++$i){
-            for ($j = 0; $j < sizeof($this->dis); ++$j){
-              foreach($_REQUEST as $gets){
-                if(preg_match (',' . $this->dis[$j] . ',', strtolower($gets)))
+        if(isset($_REQUEST))
+          for ($i = 0; $i < sizeof($_REQUEST); ++$i)
+            for ($j = 0; $j < sizeof(self::$dis); ++$j)
+              foreach($_REQUEST as $gets)
+                if(preg_match (',' . self::$dis[$j] . ',', strtolower($gets)))
                   Errors::handle_error2(null, 'Please use another word!');
-              }
-            }
-          }
-        }
     }
     
     private static $dis = ['select', 'insert', 'delete', 'update','drop table', 'union',
