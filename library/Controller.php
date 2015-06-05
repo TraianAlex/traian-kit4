@@ -79,7 +79,7 @@ class Controller {
 
     protected function getId(){
         
-        $id = isset($this->route[2]) ? $this->valid->post_sec2($this->route[2]) : null;
+        $id = isset($this->route[2]) ? $this->route[2] : null;
         return $this->valid->check($id);
     }
     
