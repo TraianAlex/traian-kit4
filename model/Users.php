@@ -99,7 +99,7 @@ class Users extends DB_Manager{
         $p = substr ( md5(uniqid(rand(), true)), 3, 10);
         $content ="Dear user,
     Your password to log in has been temporarily changed to: $p
-    Please log into ".NEW_ADDRESS.SITE_ROOT." using this password.";
+    Please log into ".ADDRESS.SITE_ROOT." using this password.";
         $subject = "Email verification";
         $from = "FROM: www.traian3.embassy-pub.ro";
         if($this->resetPass($p, $this->data['email'])){
