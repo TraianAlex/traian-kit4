@@ -60,6 +60,11 @@ class Sessions{
 
         session_regenerate_id();
         session_start();
+        if (!self::exist('generated') || self::get('generated') < (time() - 300)) {
+            session_regenerate_id();
+            self::set_session('generated', time());
+            URL::to(SITE_ROOT.'/');
+        }
         ob_start();
         ini_set('session.use_cookies', 1);
         ini_set('session.use_only_cookies', 0); //1 ?
@@ -77,6 +82,8 @@ class Sessions{
         //session_cache_limiter('public');////no-cache//private or private_no_expire
         //session_cache_limiter('private, must-revalidate');
         //session_cache_expire(60); // in minutes
+        //PHP 5.5.2 @FIXME
+        ini_set('session.use_strict_mode', 1);
     }
     
     private static function setCanary() {
@@ -152,10 +159,19 @@ class Sessions{
         }elseif (time() > self::get('start') + self::get('timelimit')) {
             $this->destroySession();
             return false;
+        }elseif (!isset($_REQUEST['t']) || $_REQUEST['t'] != $this->get('t')){//@FIXME
+            return false;
         }else{
             self::set_session('start', time());
             return true;
         }
+    }
+    //@FIXME
+    public function set_token(){
+
+        define("T2", sha1(strval(date('W')) . 'YourSpecialValueHere'));
+        $this->set_session('t', T2);
+        output_add_rewrite_var('t', T2);
     }
     
     private function destroySession(){

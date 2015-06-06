@@ -29,6 +29,7 @@ class Controller {
             if($this->route[0] != 'admins' && !in_array($this->page, ['index', 'login'])):
                 $this->check_hash();
             endif;
+            $this->session->set_token();
             $this->checkAdminPage();
         endif;
         $this->view('head');
