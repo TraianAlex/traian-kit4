@@ -61,7 +61,7 @@ class Errors{
         die('<div class="error">A system error occurred. We apologize for the inconvenience.</div><br />');
     }
 
-    function dflt_handler(Exception $e) {//it is not used yet
+    public function dflt_handler(Exception $e) {//it is not used yet
         print "Exception:\n";
         $code = $e->getCode();
         if (!empty($code)) printf("Erorr code:%d\n", $code);
@@ -71,7 +71,7 @@ class Errors{
         exit(-1);
     }
 
-    function paranoidHandler( $errno, $errstr, $errfile, $errline, $errcontext ) {
+    public function paranoidHandler( $errno, $errstr, $errfile, $errline, $errcontext ) {
         $levels = array (
         E_WARNING => "Warning",             E_USER_DEPRECATED => "Deprecated feature",
         E_USER_ERROR => "Error",            E_USER_WARNING => "Warning",
@@ -86,7 +86,7 @@ class Errors{
         die( "There was a problem, so I’ve stopped running. Please try again." );
     }
 
-    function handleMissedException($e) {
+    public function handleMissedException($e) {
         echo "Sorry, something is wrong. Please try again, or contact us.
          if the problem persists";
         error_log('Unhandled Exception: ' . $e->getMessage()

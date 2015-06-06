@@ -2,8 +2,7 @@
 
 class Core{
 
-        private static $_paths = array("model", "view", "controller", "application", "library",
-             "");
+        private static $_paths = ["model", "view", "controller", "application", "library", ""];
 
         public static function initialize(){
 
