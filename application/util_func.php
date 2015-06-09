@@ -94,7 +94,7 @@
             $name2 = $view."'s";
             $name3 = $view." is";
         }
-        return $name = array($name1, $name2, $name3);
+        return [$name1, $name2, $name3];
     }
     
     function ProtectEmail($email){

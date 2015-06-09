@@ -22,62 +22,85 @@ class Validate {
 
             if(in_array($key, $config['emptyKey']))
                 $this->isEmpty($formData[$key]);
+            
             if(in_array($key, $config['email']))
                 $this->ValidateEmail($formData[$key]);//only online
+            
             if(in_array($key, $config['size']))
                 $this->checkSize($formData[$key], 2, 255);
+            
             if(in_array($key, $config['not_allowed']))
                 $this->notAllowed($formData[$key], "<>`$()\{}#");
+            
             if(in_array($key, $config['user'])):
                 $this->ValidateText($formData[$key],3,50,"A-Za-z0-9 '@_.-","a");
                 $this->nospace($formData[$key]);
             endif;
+            
             if(in_array($key, $config['newuser'])):
                 $this->ValidateText($formData[$key],3,50,"A-Za-z0-9 '@_.-","a");
                 $this->nospace($formData[$key]);
                 $this->confirm_taken($formData[$key]);
             endif;
+            
             if(in_array($key, $config['newadmin'])):
                 $this->ValidateText($formData[$key],3,50,"A-Za-z0-9 '@_.-","a");
                 $this->nospace($formData[$key]);
                 $this->confirm_taken_admin($formData[$key]);
             endif;
+            
             if(in_array($key, $config['password']))
                 $this->ValidateText($formData[$key],4,50,"a-zA-Z0-9 !&+:@~#","");
+            
             if(in_array($key, $config['repass'])):
                 $pass = $config['password'][0];
                 $repass = $config['repass'][0];
                 if($formData[$pass] != $formData[$repass])
                   Errors::handle_error2(null,'&#x2718; Type the same password in both fields');
             endif;
+            
             if(in_array($key, $config['text']))
                 $this->ValidateText($formData[$key], 2, 45, "a-zA-Z0-9 '@_.\-!:", "a");
+            
             if(in_array($key, $config['email_exist']))
                 $this->emailExists($formData[$key]);
+            
             if(in_array($key, $config['email_exist_admin']))
                 $this->emailExistsAdm($formData[$key]);
+            
             if(in_array($key, $config['forgot_email']))
                 $this->emailExists3($formData[$key]);
+            
             if(in_array($key, $config['sizemax']))
                 $this->checkSize($formData[$key], null, 255);
+            
             if(in_array($key, $config['size_max']))
                 $this->checkSize($formData[$key], null,14000);
+            
             if(in_array($key, $config['format']))
                 $this->checkFormat($key, $formData[$key]);
+            
             if(in_array($key, $config['digit']))
                 $this->ValidateText($formData[$key], 3, 20, "0-9 -", "d");
+            
             if(in_array($key, $config['is_taken']))
                 $this->confirm_taken_name($formData[$key]);
+            
             if(in_array($key, $config['captcha']))
                 Captcha::verifyResponse($formData[$key]);
+            
             if(in_array($key, $config['captcha1']))
                 Captcha::responseCaptcha($formData[$key]);
+            
             if(in_array($key, $config['token']))
                 CSRF::checkToken($formData[$key]);
+            
             if(in_array($key, $config['token1']))
                 CSRF::checkTokenInput($formData[$key]);
+            
             if(in_array($key, $config['token_url']))
                 CSRF::checkTokenUrl($formData[$key]);
+            
             if(in_array($key, $config['injection']))
                 $this->post_sec2($formData[$key]);
         endforeach;
