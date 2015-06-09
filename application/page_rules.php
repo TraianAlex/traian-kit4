@@ -32,7 +32,7 @@
 /*
  * a white list for admin pages
  */
-       $config_page['admin'] = ['index', 'admin', 'login', 'users', 'reg_adm', 'profile_adm', 'visitors', 'test_adm'];
+       $config_page['admin'] = ['index', 'admin', 'login_adm', 'users', 'reg_adm', 'profile_adm', 'visitors', 'test_adm'];
 /*
 * in this page must log in first
 */

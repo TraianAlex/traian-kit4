@@ -15,7 +15,7 @@ final class Admins_C extends Controller{
         $this->view('admins/form_login_adm');
     }
     
-    public function login() {
+    public function login_adm() {
         
         if ($this->input->exist('submit') && $this->input->get('submit') == 'Sign In') {
             $this->valid->validation($_POST);

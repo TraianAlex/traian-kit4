@@ -26,8 +26,9 @@ class Controller {
         if(in_array($this->page, $config_page['all_pages'])):
             $this->checkUserPage();
         elseif(in_array($this->page, $config_page['admin'])):
-            if($this->route[0] != 'admins' && !in_array($this->page, ['index', 'login'])):
+            if($this->route[0] != 'admins' && !in_array($this->page, ['index', 'login_adm'])):
                 $this->check_hash();
+                $this->session->check_token();
             endif;
             $this->session->set_token();
             $this->checkAdminPage();
@@ -88,10 +89,9 @@ class Controller {
 
         file_exists(APP_PATH.'/application/page_rules.php') ?
             include APP_PATH."/application/page_rules.php" : "";
-        if(!in_array($this->page, $config_page['all_pages']))
-            URL::to(SITE_ROOT . "/");
-        if (in_array($this->page, $config_page['page_login']) &&
-           ($this->session->checkUser() === false)): //|| Users_C::check_user() === false)):
+        if(!in_array($this->page, $config_page['all_pages']) ||
+          (in_array($this->page, $config_page['page_login']) &&
+            $this->session->checkUser() === false)): //|| Users_C::check_user() === false)):
             Errors::handle_error2(null,'You must login to see this page.');
             URL::to(SITE_ROOT.'/');
         endif;
@@ -110,7 +110,7 @@ class Controller {
         if ( !$h->verify_parameters( $array ) && DEBUG_MODE === true):
             die( "Dweep! Somebody tampered with our parameters.\n" );
         elseif (!$h->verify_parameters( $array ) && DEBUG_MODE === false):
-            URL::to(SITE_ROOT . "/admin/admin.php?class=admins&page=index");
+            URL::to(SITE_ROOT . "/admins");
         endif;
     }
  
@@ -118,11 +118,10 @@ class Controller {
 
         file_exists(APP_PATH.'/application/page_rules.php') ?
             include APP_PATH."/application/page_rules.php" : "";
-        if (!in_array($this->page, $config_page['admin']))
-            URL::to(SITE_ROOT . "/admins");
-        if (in_array($this->page, $config_page['login_admin']) && $this->session->checkAdmin() === false):
+        if (!in_array($this->page, $config_page['admin']) ||
+           (in_array($this->page, $config_page['login_admin']) &&
+            $this->session->checkAdmin() === false)):
             Errors::handle_error2(null,'You must login to see this page.');
-            URL::to(SITE_ROOT.'/admins');
         endif;
         return $this->valid->check($this->page);
     }

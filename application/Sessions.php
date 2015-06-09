@@ -82,7 +82,6 @@ class Sessions{
         //session_cache_limiter('public');////no-cache//private or private_no_expire
         //session_cache_limiter('private, must-revalidate');
         //session_cache_expire(60); // in minutes
-        //PHP 5.5.2 @FIXME
         ini_set('session.use_strict_mode', 1);
     }
     
@@ -159,19 +158,23 @@ class Sessions{
         }elseif (time() > self::get('start') + self::get('timelimit')) {
             $this->destroySession();
             return false;
-        }elseif (!isset($_REQUEST['t']) || $_REQUEST['t'] != $this->get('t')){//@FIXME
-            return false;
         }else{
             self::set_session('start', time());
             return true;
         }
     }
-    //@FIXME
+
     public function set_token(){
 
-        define("T2", sha1(strval(date('W')) . 'YourSpecialValueHere'));
-        $this->set_session('t', T2);
-        output_add_rewrite_var('t', T2);
+        $t = sha1(strval(date('W')) . 'YourSpecialValueHere');
+        $this->set_session('t', $t);
+        output_add_rewrite_var('t', $t);
+    }
+
+    public function check_token(){
+
+        if (!isset($_REQUEST['t']) || $_REQUEST['t'] != $this->get('t'))
+            Errors::handle_error2(null,'You must login to see this page.');
     }
     
     private function destroySession(){
