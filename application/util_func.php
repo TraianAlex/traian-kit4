@@ -7,7 +7,7 @@
         foreach ($arr1 as $item):
             $url[] = isset($item) ? $item : '';
         endforeach;
-        Validate::get_sec2($url);
+        (new Validate)->get_sec2($url);
         return $url;
     }
 

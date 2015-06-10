@@ -21,18 +21,7 @@ class Controller {
     
     public function index() {
  
-        file_exists(APP_PATH.'/application/page_rules.php') ?
-            include APP_PATH."/application/page_rules.php": "";
-        if(in_array($this->page, $config_page['all_pages'])):
-            $this->checkUserPage();
-        elseif(in_array($this->page, $config_page['admin'])):
-            if($this->route[0] != 'admins' && !in_array($this->page, ['index', 'login_adm'])):
-                $this->check_hash();
-                $this->session->check_token();
-            endif;
-            $this->session->set_token();
-            $this->checkAdminPage();
-        endif;
+        $this->filter_page();
         $this->view('head');
         $this->dispatch();
         $this->view('footer');
@@ -83,6 +72,22 @@ class Controller {
         
         $id = isset($this->route[2]) ? $this->route[2] : null;
         return $this->valid->check($id);
+    }
+    
+    private function filter_page() {
+        
+        file_exists(APP_PATH.'/application/page_rules.php') ?
+            include APP_PATH."/application/page_rules.php": "";
+        if(in_array($this->page, $config_page['all_pages'])):
+            $this->checkUserPage();
+        elseif(in_array($this->page, $config_page['admin'])):
+            if($this->route[0] != 'admins' && !in_array($this->page, ['index', 'login_adm'])):
+                $this->check_hash();
+                $this->session->check_token();
+            endif;
+            $this->session->set_token();
+            $this->checkAdminPage();
+        endif;
     }
     
     private function checkUserPage() {

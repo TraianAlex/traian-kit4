@@ -121,10 +121,6 @@ class DB_Manager extends PDO {
     
     private function __clone(){}
 
-    public function __destruct() {
-        self::$instance = null;
-    }
-
     public function __call($name, $field){
         
         $first = isset($field[0]) ? $field[0] : null;
@@ -633,5 +629,9 @@ class DB_Manager extends PDO {
 
         foreach ( $clear_array as $v )
                 $this->{$v} = array();
+    }
+
+    public function __destruct() {
+        self::$instance = null;
     }
 }

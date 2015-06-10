@@ -22,7 +22,7 @@ class CSRF{
 
     public static function checkToken($post_v){
 
-        $tok = Validate::check(get_url()[2]);
+        $tok = (new Validate)->check(get_url()[2]);
         if(!Sessions::exist('n') || !Sessions::exist('v') || !$tok || !isset($post_v) ||
             $tok === false || empty($post_v) ||
             $tok !== Sessions::get('n') || $post_v !== Sessions::get('v') ||

@@ -29,6 +29,6 @@ class Registry{
         $class = isset(get_url()[0]) ? get_url()[0] : $config_page['default_class'];
         if(!in_array($class, $config_class['allowed']))
             $class = $config_page['default_class'];
-        return Validate::check($class);
+        return (new Validate)->check($class);
     }
 }
