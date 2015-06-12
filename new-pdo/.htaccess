@@ -1,4 +1,5 @@
 Options -MultiViews
+Options -Indexes
 RewriteEngine on
 AddType application/x-httpd-php55 .php
 RewriteBase /traian-kit4/new-pdo
@@ -34,4 +35,7 @@ RewriteRule .* – [F]
 # block referer spam buttons for website
 RewriteCond %{HTTP_REFERER} buttons\-for\-website\.com
 RewriteRule ^.* - [F,L]
-# End buttons for website block
+#protect sqlite db
+<FilesMatch "\.(sqlite|xml|txt)$">
+Deny from all
+</FilesMatch>

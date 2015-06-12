@@ -1,4 +1,4 @@
-<?php is_subclass_of('Users_C', 'Controller') ? true : URL::to(SITE_ROOT);
+<?php
 
 final class Users_C extends Controller{
     
@@ -7,25 +7,21 @@ final class Users_C extends Controller{
     }
                 
     public function index() {
-
         parent::view('header');
         parent::view('users/form_login');
     }
 
-    public function login_area() {
-        
+    public function login_area() {    
         $this->view('header');
         $this->view('users/login_area');
     }
     
-    public function nologin_area() {
-        
+    public function nologin_area() {   
         $this->view('header');
         $this->view('users/home');
     }
 
-    public function log_out() {
-        
+    public function log_out() {   
         $this->session->logout();
         URL::to(SITE_ROOT.'/');
     }
@@ -38,7 +34,7 @@ final class Users_C extends Controller{
             $this->valid->validation($_POST);
             if($this->session->attempt() === false)
                 URL::to(SITE_ROOT . "/users/forgot_password");
-            $row = call_user_func(array(new Users($_POST), 'login_user'));
+            $row = call_user_func([new Users($_POST), 'login_user']);
             if(!$row){
                 $this->session->delete_session();
                 $this->session->set_session('att', $this->session->get('att') + 1);
@@ -63,7 +59,7 @@ final class Users_C extends Controller{
     
     public static function check_user() {
         
-        $data = call_user_func(array(new Users($_POST), 'get_uid'), Sessions::get('user'));
+        $data = call_user_func([new Users($_POST), 'get_uid'], Sessions::get('user'));
         return ($data == false) ? false : true;
     }
 
@@ -125,12 +121,12 @@ final class Users_C extends Controller{
 
         //$vb = setVerb($view);
         //$pic = self::set_foto_profile($row['profile_pic_id']);
-        //$arrData = array($this->model('Users', 'get_users', $_SESSION['user']));
-        $arrData = call_user_func(array(new Users($_POST), 'get_users'), $_SESSION['user']);
+        //$arrData = [$this->model('Users', 'get_users', $_SESSION['user'])];
+        $arrData = call_user_func([new Users($_POST), 'get_users'], $_SESSION['user']);
         $this->view('header');
         if($arrData)
             $this->view('users/links_profile', $arrData);
-        $arrData2 = call_user_func(array(new Users($_POST), 'get_users_oath'), $_SESSION['user_id']);
+        $arrData2 = call_user_func([new Users($_POST), 'get_users_oath'], $_SESSION['user_id']);
         if($arrData2)
             $this->view('users/links_profile_oath', $arrData2);
     }

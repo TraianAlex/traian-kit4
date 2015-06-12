@@ -23,7 +23,7 @@ if ($_SERVER['HTTP_HOST'] == 'www.traian4.embassy-pub.ro'){
 	define("APP_PATH", $_SERVER['DOCUMENT_ROOT'].PATH);
         define("SITE_ROOT", PATH."/new-pdo");
         define("PATH_FILE", $_SERVER['DOCUMENT_ROOT'].SITE_ROOT);
-	define("ADDRESS", 'http://'.$_SERVER['HTTP_HOST']);
+	define("ADDRESS", 'http://'.$_SERVER['HTTP_HOST']);//$_SERVER['SERVER_NAME']
         define("BASE", ADDRESS.SITE_ROOT.'/');
 	define("DEBUG_MODE", true);//on the cloud change this with false
         
