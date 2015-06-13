@@ -40,25 +40,25 @@ class Ajax_method{
 
     public function delete($id) {
 
-    try {	
-        $objDb = new PDO('mysql:host=localhost;dbname=bazain2', 'root', 'aaaa');
-        $objDb->exec('SET CHARACTER SET utf8');
+        try {	
+            $objDb = new PDO('mysql:host=localhost;dbname=bazain2', 'root', 'aaaa');
+            $objDb->exec('SET CHARACTER SET utf8');
 
-        $sql = "DELETE FROM `comentarii` WHERE `id` = ?";
-        $statement = $objDb->prepare($sql);
+            $sql = "DELETE FROM `comentarii` WHERE `id` = ?";
+            $statement = $objDb->prepare($sql);
 
-        if ($statement->execute(array($id))) {
-            
-            $sql = "SELECT * FROM `comentarii` ORDER BY `Date` ASC";
-            $statement = $objDb->query($sql);
-            $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
-            echo json_encode(array('error' => false, 'posts' => count($posts)));
-        } else {
-                echo json_encode(array('error' => true, 'case' => 3));
+            if ($statement->execute([$id])) {
+                
+                $sql = "SELECT * FROM `comentarii` ORDER BY `Date` ASC";
+                $statement = $objDb->query($sql);
+                $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
+                echo json_encode(['error' => false, 'posts' => count($posts)]);
+            } else {
+                    echo json_encode(['error' => true, 'case' => 3]);
+            }
+        } catch(Exception $e) {
+                echo json_encode(['error' => true, 'case' => 2, 'message' => $e->getMessage()]);
         }
-    } catch(Exception $e) {
-            echo json_encode(array('error' => true, 'case' => 2, 'message' => $e->getMessage()));
-    }
     }
 }
 

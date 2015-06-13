@@ -35,14 +35,14 @@ class Users extends DB_Manager{
         self::$instance->table = 'users';
         $pak = Hash::create_hash($this->data['pwd']);
         $pwd = explode(':', $pak);
-        $result = self::$instance->values(array('username' => $this->data['newuser'],
+        $result = self::$instance->values(['username' => $this->data['newuser'],
                                            'password' => $pwd[3],
                                               'salt' => $pwd[2],
                                               'email' => $this->data['email'],
                                                'uid' => '3',
                                                 'ip' => htmlspecialchars($_SERVER['REMOTE_ADDR']),
                                             'created' => date("Y/m/d H:i:s"),
-                                            'updated' => date("Y/m/d H:i:s")))->insert();
+                                            'updated' => date("Y/m/d H:i:s")])->insert();
         if($result) return true;
         $result->closeCursor();
         return false;
@@ -120,7 +120,7 @@ class Users extends DB_Manager{
         $pwd = explode(':', $pak);
         self::$instance = DB_Manager::get_instance($_POST)->database();
         self::$instance->table = 'users';
-        $res = self::$instance->set(array('password' => $pwd[3], 'salt' => $pwd[2]))
+        $res = self::$instance->set(['password' => $pwd[3], 'salt' => $pwd[2]])
                 ->where('email', $email)->where('uid', '3')->update();
         return $res ? true : false;
     }
@@ -145,7 +145,7 @@ class Users extends DB_Manager{
 
         self::$instance = DB_Manager::get_instance($_POST)->database();
         self::$instance->table = 'users';
-        $res = self::$instance->set(array('email' => $this->data['p_email'], 'updated'=> date("Y/m/d H:i:s")))
+        $res = self::$instance->set(['email' => $this->data['p_email'], 'updated'=> date("Y/m/d H:i:s")])
                 ->where('username', $_SESSION['user'])->where('uid', '3')->update();
         return $res ? true : false;
     }
@@ -160,7 +160,7 @@ class Users extends DB_Manager{
         self::$instance->table = 'users';
         $pak = Hash::create_hash($this->data['pwd']);
         $pwd = explode(':', $pak);
-        $res = self::$instance->set(array('password' => $pwd[3], 'salt' => $pwd[2], 'updated'=> date("Y/m/d H:i:s")))
+        $res = self::$instance->set(['password' => $pwd[3], 'salt' => $pwd[2], 'updated'=> date("Y/m/d H:i:s")])
                 ->where('username', $_SESSION['user'])->where('uid', '3')->update();
         return $res ? true : false;
     }
@@ -198,10 +198,10 @@ class Users extends DB_Manager{
         self::$instance = DB_Manager::get_instance($_POST)->database();
         self::$instance->table = 'tbl_users';
         $time = time();
-        $result = self::$instance->values(array('fld_user_name' => $name,
+        $result = self::$instance->values(['fld_user_name' => $name,
                                            'fld_user_email' => $email,
                                             'fld_google_id' => $id,
-                                             'fld_user_doj' => $time))->insert();
+                                             'fld_user_doj' => $time])->insert();
         if($result) return true;
         $result->closeCursor();
         return false;
@@ -211,7 +211,7 @@ class Users extends DB_Manager{
         
         self::$instance = DB_Manager::get_instance($_POST)->database();
         self::$instance->table = 'tbl_users';
-        $res = self::$instance->set(array('fld_user_name' => $name, 'fld_user_email' => $email))
+        $res = self::$instance->set(['fld_user_name' => $name, 'fld_user_email' => $email])
                 ->where('fld_google_id', $id)->update();
         return $res ? true : false;
     }
@@ -237,10 +237,10 @@ class Users extends DB_Manager{
         self::$instance = DB_Manager::get_instance($_POST)->database();
         self::$instance->table = 'tbl_users_fb';
         $time = time();
-        $result = self::$instance->values(array('fld_user_name' => $name,
+        $result = self::$instance->values(['fld_user_name' => $name,
                                            'fld_user_email' => $email,
                                           'fld_facebook_id' => $id,
-                                             'fld_user_doj' => $time))->insert();
+                                             'fld_user_doj' => $time])->insert();
         if($result) return true;
         $result->closeCursor();
         return false;
@@ -250,7 +250,7 @@ class Users extends DB_Manager{
         
         self::$instance = DB_Manager::get_instance($_POST)->database();
         self::$instance->table = 'tbl_users_fb';
-        $res = self::$instance->set(array('fld_user_name' => $name, 'fld_user_email' => $email))
+        $res = self::$instance->set(['fld_user_name' => $name, 'fld_user_email' => $email])
                 ->where('fld_facebook_id', $id)->update();
         return $res ? true : false;
     }

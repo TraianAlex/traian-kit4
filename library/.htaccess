@@ -1,4 +1,4 @@
 Option -Indexes
-<FilesMatch "\.(sqlite|xml|txt|ini)$">
+<FilesMatch "\.(sqlite|xml|txt|ini|ttf)$">
 Deny from all
 </FilesMatch>

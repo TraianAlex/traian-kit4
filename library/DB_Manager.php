@@ -164,7 +164,7 @@ class DB_Manager extends PDO {
     public function database() {
         try{
             $config = Config_ini::getConfig("db");
-            $pdo_errconf = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION);//PDO::ERRMODE_WARNING
+            $pdo_errconf = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];//PDO::ERRMODE_WARNING
             parent::__construct($config['dsn'], $config['username'], $config['password'], $pdo_errconf);
             return $this;
         }catch(Exception $e){
@@ -617,12 +617,12 @@ class DB_Manager extends PDO {
      */
     private function clear() {
         
-        $clear_null = array(
+        $clear_null = [
                 '_query',    '_select', '_alias', '_join',     '_update',
-                '_data_set', '_delete', '_where', '_group_by', '_order_by');
+                '_data_set', '_delete', '_where', '_group_by', '_order_by'];
 
-        $clear_array = array(
-                '_data', '_insert', '_result', '_insert_binds');
+        $clear_array = [
+                '_data', '_insert', '_result', '_insert_binds'];
 
         foreach ( $clear_null as $v )
                 $this->{$v} = NULL;

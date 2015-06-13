@@ -36,6 +36,6 @@ RewriteRule .* – [F]
 RewriteCond %{HTTP_REFERER} buttons\-for\-website\.com
 RewriteRule ^.* - [F,L]
 #protect sqlite db
-<FilesMatch "\.(sqlite|xml|txt)$">
+<FilesMatch "\.(sqlite|xml|txt|log|md)$">
 Deny from all
 </FilesMatch>
