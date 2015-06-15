@@ -2,8 +2,58 @@
 
 class URL{
 
+    private $base_url;
+    private $parameters;
+    private $file;
+    private $text;
+
+    public function __construct(){
+        $this->base_url = SITE_ROOT;
+    }
+
+    public function add_param($param_val){
+        $this->parameters = $param_val;
+    }
+
+    public function set_file($value){
+        $this->file = $value;
+    }
+
+    public function set_text($value){
+        $this->text = $value;
+    }
+
+    public function render(){
+        $r = '';
+        if(count($this->parameters))
+            $r .= $this->base_url .'/'. $this->parameters;
+        if(trim($this->file) != '')
+            $r .= '/'. $this->file;
+        return $r;
+    }
+
+    public function r_link(){
+        if(trim($this->text) == '')
+            $text = $this->render();
+        else
+            $text = $this->text;
+        return '<a href="'.$this->render().'">'.$text.'</a>';
+    }
+
+    public static function link($param, $text=null, $file=null){
+
+        $url = new URL();
+        $url->set_file($file);
+        $url->set_text($text);
+        if(count($param) > 0){
+            $url->add_param($param);
+        }
+        return $url->r_link();
+    }
+/*
+* redirect url
+*/
     public static function to($url){
-        
         if($url){
             if(is_numeric($url)){
                 switch ($url) {
@@ -21,7 +71,7 @@ class URL{
             exit;
         }
     }
-//link li
+//link <li>
     public static function link_l($url, $label, $target=null){
         return '<li><a href="'.$url.'" target='.$target.'>'. $label .'</a></li>';
     }
