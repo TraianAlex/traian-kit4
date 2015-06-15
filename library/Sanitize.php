@@ -130,7 +130,6 @@ class Sanitize{
         $de_inloc = $cu_inloc = [];
         $de_inloc[] = ["prost", "cacat", "pisat", "pula", "sula", "pizda", "muie", "sugi", "coi", "coios", "taran", "curva", "jepat", "fuck", "futut", "fut", "fute", "muist", "bulesc", "babardesc", "homo", "homosexual", "bulit", "futi", "floci", "bagami-as", "bagamias", "mata", "tact-o", 'bitch', "bitchass", "blowjob", "blow job", "shit"];
         $cu_inloc[] = "<span style=\"color:red; font-style: italic;\">×××</span>";
-
         $de_inloc[] = ":))";
         $cu_inloc[] = "<img src=\"" . SITE_ROOT . "/admin/images/zambareti/zambaret_1.gif\" align=\"middle\" alt=\"&#058;&#041;&#041;\" title=\"&#058;&#041;&#041;\" border=\"0\">";
         $de_inloc[] = ">:)";
@@ -177,6 +176,18 @@ class Sanitize{
         }
         $txt = nl2br($txt);
         return $txt;
+    }
+
+    function change_words($txt){
+        $pattern[] = "/prost|cacat|pisat|pula|sula|pizda|muie|sugi|coi|coios|taran|curva|jepat|fuck|futut|fut|fute|muist|bulesc|babardesc|homo|homosexual|bulit|futi|floci|bagami-as|bagamias|mata|tact-o|bitch|bitchass|blowjob|blow job|shit/";
+        $replace[] = "<span style=\"color:red; font-style: italic;\">×××</span>";
+        if(is_array($txt) && count($txt) > 0){
+            foreach ($txt as $value) {
+                return preg_replace($pattern, $replace, $value);
+            }
+        }else{
+            return preg_replace($pattern, $replace, $txt);
+        }
     }
 
     public static function add($array){
