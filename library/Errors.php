@@ -31,8 +31,7 @@ class Errors{
     public static function handle_error($user_error_message, $system_error_message) {
         Sessions::set_session('error_message', $user_error_message);
         Sessions::set_session('system_error_message', $system_error_message);
-        URL::to(SITE_ROOT . "/show_error.php");
-        exit();
+        URL::to("show_error.php");
     }
 
     public static function handle_error2($success_msg, $error_msg) {
@@ -40,7 +39,8 @@ class Errors{
         Sessions::set_session('error_msg', $error_msg);
         if (!isset($_SERVER['HTTP_REFERER']))
             $_SERVER['HTTP_REFERER'] = SITE_ROOT . "/";
-        URL::to($_SERVER['HTTP_REFERER']);
+        header('Location: ' . $_SERVER['HTTP_REFERER'] );
+        exit();
         return; //return to check admin after user
     }
 

@@ -53,7 +53,7 @@ class URL{
 /*
 * redirect url
 */
-    public static function to($url){
+    public static function to($url=null){
         if($url){
             if(is_numeric($url)){
                 switch ($url) {
@@ -67,7 +67,10 @@ class URL{
                     break;
                 }
             }
-            header('Location: ' . $url ) ;
+            header('Location: ' . SITE_ROOT .'/'. $url ) ;
+            exit;
+        }else{
+            header('Location: ' . SITE_ROOT .'/' ) ;
             exit;
         }
     }
@@ -138,7 +141,7 @@ class URL{
     public static function xlink3($class, $page, $id){
 
         $h = new Crypt_HMAC(KEY);
-        return SITE_ROOT."/".$h->create_parameters(array('class' => $class, 'page' => $page, 'id' => $id));
+        return $h->create_parameters(array('class' => $class, 'page' => $page, 'id' => $id));
     }
 /**
  * admin

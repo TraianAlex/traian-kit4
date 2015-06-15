@@ -63,7 +63,7 @@ class Sessions{
         if (!self::exist('generated') || self::get('generated') < (time() - 300)) {
             session_regenerate_id();
             self::set_session('generated', time());
-            URL::to(SITE_ROOT.'/');
+            URL::to();
         }
         ob_start();
         ini_set('session.use_cookies', 1);

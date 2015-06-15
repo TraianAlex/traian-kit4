@@ -24,15 +24,15 @@
 /*
  *  check if the size is between 2 and 255
  */
-       $config['size'] = array();
+       $config['size'] = [];
 /*
  * check if exist not allowed chars like "<>`$()\{}#" 
  */  
-       $config['not_allowed'] = array();
+       $config['not_allowed'] = [];
 /*
  * check if the size are between o and 255. focused for the max size and can be empty
  */
-       $config['sizemax'] = array();
+       $config['sizemax'] = [];
 /*
  * only text validation like min=2, max=45, allowed="a-zA-Z0-9 '@_.\-!:", required="a"
  * The required characters. This argument is a string containing one or more of the
@@ -40,7 +40,7 @@
    lower, upper, digit or _) or punctuation. For each of these included, at least one of
    that type of character must be in the string
  */
-       $config['text'] = array();
+       $config['text'] = [];
 /*
  * in validation.php we can set suplimentary rules
  * case 'adresa':
@@ -103,16 +103,16 @@ default:
  * check if the size are between o and 14000. focused for the max size and can be empty
  * it is not restricted for not allowed chars
  */
-       $config['size_max'] = array();
+       $config['size_max'] = [];
 /*
  * validate text but only digit and dash
  * min = 3, max = 20, allowed = "0-9 -", required = "d"
  */
-       $config['digit'] = array();
+       $config['digit'] = [];
 /*
  * check if a name or other item (first define a function in model and in Validate)
  */
-       $config['is_taken'] = array();
+       $config['is_taken'] = [];
 /*
  * anti spam rule like captcha. if s_q field exist than Captcha::verfyResponse($_POST['s_q']) execute
  */

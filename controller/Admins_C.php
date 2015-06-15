@@ -7,7 +7,7 @@ final class Admins_C extends Controller{
     }
 
     public function index() {
-        URL::to(SITE_ROOT."/admins/admin");
+        URL::to("admins/admin");
     }
 
     public function admin() {

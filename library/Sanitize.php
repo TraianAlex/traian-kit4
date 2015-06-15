@@ -17,13 +17,13 @@ class Sanitize{
  * redirect if no name exist
  * sanitize where need a customatization in sanitizing input
  */
-    static function sanitize_vars(&$vars, $sigs, $redir_url = SITE_ROOT) {
+    static function sanitize_vars(&$vars, $sigs, $redir_url = true) {
 
         $tmp = array();
         foreach ($sigs as $name => $sig) {/*Walk through the signatures and add them to the temporary array $tmp */
          if (!isset($vars[$name]) && isset($sig['required']) && $sig['required']) {
-                if ($redir_url) {//redirect if the variable doesn't exist in the ar
-                    URL::to($redir_url);
+                if ($redir_url == true) {//redirect if the variable doesn't exist in the ar
+                    URL::to();
                 } else {
                         echo 'Parameter $name not present and no redirect URL';
                 }
@@ -127,8 +127,8 @@ class Sanitize{
  */
     static function format($txt) {
         
-        $de_inloc = $cu_inloc = array();
-        $de_inloc[] = array("prost", "cacat", "pisat", "pula", "sula", "pizda", "muie", "sugi", "coi", "coios", "taran", "curva", "jepat", "fuck", "futut", "fut", "fute", "muist", "bulesc", "babardesc", "homo", "homosexual", "bulit", "futi", "floci", "bagami-as", "bagamias", "mata", "tact-o", 'bitch', "bitchass", "blowjob", "blow job", "shit");
+        $de_inloc = $cu_inloc = [];
+        $de_inloc[] = ["prost", "cacat", "pisat", "pula", "sula", "pizda", "muie", "sugi", "coi", "coios", "taran", "curva", "jepat", "fuck", "futut", "fut", "fute", "muist", "bulesc", "babardesc", "homo", "homosexual", "bulit", "futi", "floci", "bagami-as", "bagamias", "mata", "tact-o", 'bitch', "bitchass", "blowjob", "blow job", "shit"];
         $cu_inloc[] = "<span style=\"color:red; font-style: italic;\">×××</span>";
 
         $de_inloc[] = ":))";

@@ -122,7 +122,7 @@
         foreach ($files as $file){
             unlink($_SERVER['DOCUMENT_ROOT'] . SITE_ROOT . "/tmp/" . $file);
         }
-        URL::to(SITE_ROOT."/php/menu");
+        URL::to("php/menu");
     }
 /**
  * encrypt and decrypt data

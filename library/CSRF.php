@@ -28,7 +28,6 @@ class CSRF{
             $tok !== Sessions::get('n') || $post_v !== Sessions::get('v') ||
             !Sessions::exist('time') || (time() - Sessions::get('time') >= 180)){
             Errors::handle_error2(null,'&#x2718; Try again.');
-            exit;
         }
     }
 /**
@@ -46,7 +45,6 @@ class CSRF{
             Input::exist('token', 'get')=== false || Input::get('token') !== Sessions::get('token') ||
             !Sessions::exist('time') || (time() - Sessions::get('time') >= 120)){
             Errors::handle_error2(null,'&#x2718; Try again.');
-            exit;
         }
     }
 /*
@@ -65,7 +63,6 @@ class CSRF{
             $post_v1 !== Sessions::get('v1') ||
             !Sessions::exist('time') || (time() - Sessions::get('time') >= 180)){
             Errors::handle_error2(null,'&#x2718; Try again.');
-            exit;
         }
     }
 }

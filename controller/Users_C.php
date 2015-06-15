@@ -23,7 +23,7 @@ final class Users_C extends Controller{
 
     public function log_out() {   
         $this->session->logout();
-        URL::to(SITE_ROOT.'/');
+        URL::to();
     }
 
 /*---------------------------------------------------------------------------------*/
@@ -33,17 +33,15 @@ final class Users_C extends Controller{
         if ($this->input->exist('submit') && $this->input->get('submit') == 'Sign In') {
             $this->valid->validation($_POST);
             if($this->session->attempt() === false)
-                URL::to(SITE_ROOT . "/users/forgot_password");
+                URL::to("users/forgot_password");
             $row = call_user_func([new Users($_POST), 'login_user']);
             if(!$row){
                 $this->session->delete_session();
                 $this->session->set_session('att', $this->session->get('att') + 1);
                 Errors::handle_error2(null,'The username or password does not match!');
-                //$this->session->flash('error_msg', 'The username or password does not match!');
-                //URL::to($_SERVER['HTTP_REFERER']);
             }
             $this->auth_user($row);
-            URL::to(SITE_ROOT."/users/login_area");
+            URL::to("users/login_area");
         }
     }
 
@@ -108,7 +106,7 @@ final class Users_C extends Controller{
                     }
             }catch(Exception $e){
                  Errors::handle_error2($e->getMessage(), null);
-                 URL::to(SITE_ROOT."/users/login_area");
+                 URL::to("users/login_area");
             }
         }
         $this->view('header');
@@ -225,7 +223,7 @@ final class Users_C extends Controller{
             else
                 $this->Users->update_oath($name, $email, $id);
             $this->auth_user_oath($name, $id, $profile_pic);
-            URL::to(SITE_ROOT."/users/login_area");
+            URL::to("users/login_area");
         }
     }
 
@@ -253,7 +251,7 @@ final class Users_C extends Controller{
             else
                 $this->Users->update_fb($name, $email, $id);
             $this->auth_user_fb($name, $id);
-            URL::to(SITE_ROOT."/users/login_area");
+            URL::to("users/login_area");
         }
     }
     

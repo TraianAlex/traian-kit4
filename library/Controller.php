@@ -98,7 +98,7 @@ class Controller {
           (in_array($this->page, $config_page['page_login']) &&
             $this->session->checkUser() === false)): //|| Users_C::check_user() === false)):
             Errors::handle_error2(null,'You must login to see this page.');
-            URL::to(SITE_ROOT.'/');
+            URL::to();
         endif;
         return $this->valid->check($this->page);
     }   
@@ -115,7 +115,7 @@ class Controller {
         if ( !$h->verify_parameters( $array ) && DEBUG_MODE === true):
             die( "Dweep! Somebody tampered with our parameters.\n" );
         elseif (!$h->verify_parameters( $array ) && DEBUG_MODE === false):
-            URL::to(SITE_ROOT . "/admins");
+            URL::to("admins");
         endif;
     }
  
