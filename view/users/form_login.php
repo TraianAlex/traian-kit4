@@ -94,7 +94,7 @@ function update_user_data(response)
             type: "POST",
             dataType: 'json',
             data: response,
-            url: 'http://localhost/traian-kit3/new-pdo/users/oath_ajax_login',
+            url: 'http://localhost/traian-kit4/new-pdo/users/oath_ajax_login',
             success: function(msg) {
                if(msg.error== 1)
                {
@@ -152,7 +152,7 @@ function getUserInfo() {
             type: "POST",
             dataType: 'json',
             data: response,
-            url: 'http://localhost/traian3/new-pdo/users/oath_fb_login',
+            url: 'http://localhost/traian-kit4/new-pdo/users/oath_fb_login',
             success: function(msg) {
                 if(msg.error== 1){
                    alert('Something Went Wrong!');

@@ -237,8 +237,8 @@ final class Users_C extends Controller{
     }
     
     private function clean_post($data){
-	$data = trim(strip_tags($data));
-	return $data;
+	   $data = trim(strip_tags($data));
+	   return $data;
     }
     
     public function oath_fb_login() {
