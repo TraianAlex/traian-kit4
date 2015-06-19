@@ -4,8 +4,10 @@ class URL{
 
     private $base_url;
     private $parameters;
-    private $file;
     private $text;
+    private $js;
+    private $style;
+    private $file;
 
     public function __construct(){
         $this->base_url = SITE_ROOT;
@@ -15,12 +17,20 @@ class URL{
         $this->parameters = $param_val;
     }
 
-    public function set_file($value){
-        $this->file = $value;
-    }
-
     public function set_text($value){
         $this->text = $value;
+    }
+    
+    public function set_js($value){
+        $this->js = $value;
+    }
+    
+    public function set_style($value){
+        $this->style = $value;
+    }
+    
+    public function set_file($value){
+        $this->file = $value;
     }
 
     public function render(){
@@ -37,14 +47,16 @@ class URL{
             $text = $this->render();
         else
             $text = $this->text;
-        return '<a href="'.$this->render().'">'.$text.'</a>';
+        return '<a '.$this->style.' href="'.$this->render().'" '.$this->js.'>'.$text.'</a>';
     }
 
-    public static function link($param, $text=null, $file=null){
+    public static function link($param, $text=null, $js=null, $style=null, $file=null){
 
         $url = new URL();
         $url->set_file($file);
         $url->set_text($text);
+        $url->set_js($js);
+        $url->set_style($style);
         if(count($param) > 0){
             $url->add_param($param);
         }
@@ -132,10 +144,10 @@ class URL{
         return "<a href='".SITE_ROOT."/".$h->create_parameters(array('class' => $class, 'page'=>$page,'id'=>$id))."'>$string</a>";
     }
 //for sidebar
-    public static function xlink2($class, $page, $id, $string){
+    public static function xlink2($style, $class, $page, $id, $string){
 
         $h = new Crypt_HMAC(KEY);
-        return "<a $class href='".SITE_ROOT."/".$h->create_parameters(array('class' => $class, 'page'=>$page,'id'=>$id))."'>$string</a>";
+        return "<a $style href='".SITE_ROOT."/".$h->create_parameters(array('class' => $class, 'page'=>$page,'id'=>$id))."'>$string</a>";
     }
 
     public static function xlink3($class, $page, $id){

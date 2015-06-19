@@ -18,6 +18,7 @@ $('form.ajax').on('submit', function(){
            data: data,
            success: function(response) {
                //console.log(response);
+               window.location.assign("http://localhost/traian4/new-pdo/ajax/post_data_form");
                document.getElementById('message').innerHTML = response;
             }
         });

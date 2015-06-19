@@ -121,31 +121,31 @@ class Paging extends Base{
         return $result;
     }
 
-    public function prev2($h, $adr, $page, $prev="Previous") {
+    public function prev2($class, $page, $prev="Previous") {
         
       if($this->page > 1) {
         $pr = $this->page - 1;
         //return "<a class='prev' href=".SITE_ROOT."/{$page}/{$pr}>{$prev}</a> ";
-        return URL::xlink2('class="prev"', $h, $adr, $page, $pr, $prev);
+        return URL::xlink2('class="prev"', $class, $page, $pr, $prev);
     }
     }
 
-    public function next2($h, $adr, $page, $next="Next"){
+    public function next2($class, $page, $next="Next"){
         
        if($this->page < $this->total_pages) {
          $nx = $this->page + 1;
          //return "<a class='next' href=".SITE_ROOT."/{$page}/{$nx}>{$next}</a>";
-         return URL::xlink2('class="next"', $h, $adr, $page, $nx, $next);
+         return URL::xlink2('class="next"', $class, $page, $nx, $next);
     }
     }
 
-    public function curent2($h, $adr, $page){
+    public function curent2($class, $page){
         for($pages = 1; $pages <= $this->total_pages; $pages++){
             if(($this->page) == $pages){
                 echo " <b>{$this->page}</b> ";
             }else{
                 //echo "<a href=".SITE_ROOT."/{$page}/{$pages}>{$pages}</a> ";
-                echo URL::xlink2('class="next"', $h, $adr, $page, $pages, $pages);
+                echo URL::xlink2('class="next"', $class, $page, $pages, $pages);
             }
         }
     }
