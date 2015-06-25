@@ -43,9 +43,7 @@ class Users extends DB_Manager{
                                                 'ip' => htmlspecialchars($_SERVER['REMOTE_ADDR']),
                                             'created' => date("Y/m/d H:i:s"),
                                             'updated' => date("Y/m/d H:i:s")])->insert();
-        if($result) return true;
-        $result->closeCursor();
-        return false;
+        return $result ? true : false;
     }
     
     public function get_uid($p) {
@@ -101,7 +99,7 @@ class Users extends DB_Manager{
     Your password to log in has been temporarily changed to: $p
     Please log into ".ADDRESS.SITE_ROOT." using this password.";
         $subject = "Email verification";
-        $from = "FROM: www.traian3.embassy-pub.ro";
+        $from = "FROM: www.traian4.embassy-pub.ro";
         if($this->resetPass($p, $this->data['email'])){
             mail($this->data['email'], $subject, $content, $from);
             throw new Exception('&#x2714; Instructions regarding resetting your password have been sent to '.$this->data['email']);
