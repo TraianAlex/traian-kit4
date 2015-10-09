@@ -2,17 +2,15 @@
 
 if(file_exists('../config.php')) include_once '../config.php';
 
-  if (isset($_SESSION['error_message'])) {
-	$error_message = preg_replace("/\\\\/", '', $_SESSION['error_message']);
-  } else {
+  if (Sessions::exist('error_message'))
+     $error_message = preg_replace("/\\\\/", '', Sessions::get('error_message');
+  else
      $error_message = "Something went wrong, and that's how you ended up here.";
-  }
 
- if (isset($_SESSION['system_error_message'])) {
-	$system_error_message = preg_replace("/\\\\/", '', $_SESSION['system_error_message']);
- } else {
+ if (Sessions::exist('system_error_message'))
+	$system_error_message = preg_replace("/\\\\/", '', Sessions::get('system_error_message');
+ else
 	$system_error_message = "No system-level error message was reported.";
-  }
 
   include "../view/head.php";
   include "../view/header.php";?>
@@ -34,15 +32,13 @@ the problem, you can do that <a href="<?=SITE_ROOT?>">by
 clicking here.</a> If the same problem occurs, though, you may
 want to come back a bit later. We bet we'll have things figured
 out by then. Thanks again... we'll see you soon. And again, we're
-really sorry for the inconvenience.</p>
-    <?php
+really sorry for the inconvenience.</p><?php
       debug_print("<hr />");
-      debug_print("<p>The following system-level message was received: <b>{$system_error_message}</b></p>");
-    ?>
+      debug_print("<p>The following system-level message was received: <b>{$system_error_message}</b></p>");?>
   </div><?php
    echo '</section>';
   include_once '../view/footer.php';
-  if(isset($_SESSION['error_message'])||isset($_SESSION['system_error_message'])){
-    unset($_SESSION['error_message'],$_SESSION['system_error_message']);
+  if(Sessions::exist('error_message') || Sessions::exist('system_error_message')){
+    Sessions::delete(['error_message' , 'system_error_message']);
     session_destroy();
-}
+  }

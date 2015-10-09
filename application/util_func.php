@@ -1,7 +1,6 @@
 <?php
 
     function get_url(){
-        
         $raw_url = filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_URL);
         $arr1 = explode('/', trim(str_replace(SITE_ROOT, '', parse_url($raw_url)['path']), '/'));
         foreach ($arr1 as $item):
@@ -9,6 +8,17 @@
         endforeach;
         (new Validate)->get_sec2($url);
         return $url;
+    }
+
+    function load_file($where, $default='') {
+        $content = filter_input(INPUT_GET, $where, FILTER_SANITIZE_STRING);
+        $default = filter_var($default, FILTER_SANITIZE_STRING);
+        $content = (empty($content)) ? $default : $content;
+        if ($content && file_exists(APP_PATH . $content.'.php'))
+            $html = include APP_PATH . $content.'.php';
+        else
+            Errors::handle_error("The file $content is missing", "Sorry");
+        return $html;
     }
 
     function show_date() {

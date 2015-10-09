@@ -2,12 +2,12 @@
 
 class Controller {
 
-    protected $valid;
-    protected $session;
-    protected $input;
+    protected $valid = null;
+    protected $session = null;
+    protected $input = null;
     protected $route = [];
-    protected $page;
-    protected $id;
+    protected $page = null;
+    protected $id = null;
 
     public function __construct() {
         $this->valid = new Validate();
